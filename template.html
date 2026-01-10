@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Outlook 호환성을 위한 기본 스타일 */
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        a {
+            text-decoration: none;
+            color: #0078d4;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+            color: #005a9e;
+        }
+        .container {
+            width: 700px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        .header {
+            background-color: #f3f2f1;
+            padding: 20px;
+            border-bottom: 3px solid #0078d4;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #201f1e;
+        }
+        .header .date {
+            margin: 5px 0 0 0;
+            color: #666;
+            font-size: 13px;
+        }
+        .header .intro {
+            margin-top: 10px;
+            color: #333;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #201f1e;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .quick-view {
+            background-color: #eee;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .quick-view h2 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+            color: #201f1e;
+        }
+        .top-links ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .top-links li {
+            margin-bottom: 5px;
+        }
+        .category-header {
+            background-color: #0078d4;
+            color: white;
+            padding: 10px 15px;
+            display: block;
+            width: 100%;
+            font-weight: bold;
+            margin-bottom: 15px;
+            margin-top: 20px;
+            border-radius: 4px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .detail-item {
+            margin-bottom: 20px;
+            border-left: 3px solid #0078d4;
+            padding-left: 10px;
+        }
+        .detail-title {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 8px;
+            color: #0078d4;
+            font-weight: bold;
+        }
+        .detail-summary {
+            font-size: 13px;
+            color: #555;
+            background-color: #fafafa;
+            padding: 12px;
+            border-left: 3px solid #ddd;
+            line-height: 1.6;
+        }
+        .divider {
+            border: 0;
+            height: 2px;
+            background-color: #ddd;
+            margin: 30px 0;
+        }
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 40px;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+        }
+        .category-section {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 헤더 -->
+        <div class="header">
+            <h1>{{ title }}</h1>
+            <p class="date">{{ date }} 발행</p>
+            <p class="intro">{{ intro }}</p>
+        </div>
+
+        <!-- 1. 오늘의 주요 뉴스 (상단 링크 모음) -->
+        <div class="quick-view">
+            <h2>📌 오늘의 주요 뉴스 (Quick View)</h2>
+            <table width="100%" cellpadding="0" cellspacing="0">
+                {% for cat_name, items in data.items() %}
+                {% if items %}
+                <tr>
+                    <td style="padding: 10px 0;">
+                        <strong style="color: #005a9e; font-size: 14px;">{{ cat_name }}</strong>
+                        <ul style="margin-top: 5px; margin-bottom: 0;">
+                            {% for item in items[:5] %}
+                            <li style="margin-bottom: 5px;"><a href="{{ item.link }}" target="_blank">{{ item.title }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+            </table>
+        </div>
+
+        <hr class="divider">
+
+        <!-- 2. 상세 뉴스 (하단 상세 내용) -->
+        {% for cat_name, items in data.items() %}
+        {% if items %}
+            <div class="category-section">
+                <div class="category-header">{{ cat_name }}</div>
+
+                {% for item in items %}
+                <div class="detail-item">
+                    <a href="{{ item.link }}" class="detail-title" target="_blank">{{ item.title }}</a>
+                    <div class="detail-summary">
+                        {{ item.summary }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endfor %}
+
+        <!-- 푸터 -->
+        <div class="footer">
+            <p>MS본부 뉴스레터 자동 생성 시스템</p>
+            <p>Generated by Daily Tech News Curator</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,430 @@
+# =================================================================
+# Daily Tech News Curator - 설정 파일 (최종 버전)
+# =================================================================
+# MS본부 뉴스레터 자동 생성 시스템
+# =================================================================
+
+# 뉴스레터 기본 정보
+newsletter_title: "MS본부 뉴스레터"
+intro_text: "오늘의 주요 IT/Tech 뉴스 트렌드를 공유합니다."
+
+# 제외할 키워드 (광고, 부고 등)
+exclude_keywords:
+  - "인사"
+  - "부고"
+  - "주식"
+  - "특징주"
+  - "광고"
+  - "모집"
+  - "채용"
+  - "프로모션"
+
+# 카테고리 설정
+categories:
+  Display:
+    keywords:
+      - "TV"
+      - "텔레비전"
+      - "OLED"
+      - "QLED"
+      - "스마트TV"
+      - "모니터"
+      - "게이밍모니터"
+      - "디스플레이"
+      - "전자칠판"
+    priority_brands:  # 우선순위 제조사 (가중치 부여)
+      - "LG"
+      - "삼성"
+      - "Samsung"
+      - "소니"
+      - "Sony"
+      - "하이센스"
+      - "Hisense"
+      - "TCL"
+    max_items: 10
+    rss_sources:
+      # 전문 디스플레이 매체
+      - url: "https://www.flatpanelshd.com/rss.php"
+        name: "FlatpanelsHD"
+      - url: "https://displaydaily.com/feed/"
+        name: "DisplayDaily"
+      - url: "https://www.oled-info.com/rss.xml"
+        name: "OLED-info"
+      - url: "https://tftcentral.co.uk/feed"
+        name: "TFTCentral"
+      - url: "https://www.rtings.com/tv/reviews/feed"
+        name: "RTINGS TV Reviews"
+      - url: "https://www.hdtvtest.co.uk/news/rss.xml"
+        name: "HDTVTest"
+      - url: "https://www.pcmonitors.info/feed/"
+        name: "PC Monitors"
+      # AV 전문 매체
+      - url: "https://www.avforums.com/articles/index.rss"
+        name: "AVForums"
+      - url: "https://www.whathifi.com/rss.xml"
+        name: "WhatHiFi"
+      # 종합 IT 매체
+      - url: "https://www.cnet.com/rss/all/"
+        name: "CNET"
+      - url: "https://www.theverge.com/rss/index.xml"
+        name: "The Verge"
+      - url: "https://www.engadget.com/rss.xml"
+        name: "Engadget"
+      - url: "https://www.digitaltrends.com/feed/"
+        name: "Digital Trends"
+
+  ID:
+    keywords:
+      - "LED"
+      - "마이크로LED"
+      - "MicroLED"
+      - "사이니지"
+      - "상업용디스플레이"
+      - "signage"
+      - "digital signage"
+      - "전자칠판"
+      - "interactive display"
+      - "commercial display"
+    max_items: 10
+    rss_sources:
+      # LED 전문 매체
+      - url: "https://www.microled-info.com/rss.xml"
+        name: "MicroLED-info"
+      - url: "https://www.oled-info.com/rss.xml"
+        name: "OLED-info"
+      - url: "https://www.ledinside.com/rss"
+        name: "LEDinside"
+      # 디스플레이/사이니지 전문 매체
+      - url: "https://displaydaily.com/feed/"
+        name: "DisplayDaily"
+      - url: "https://www.digitalsignagetoday.com/rss/"
+        name: "Digital Signage Today"
+      - url: "https://www.sixteen-nine.net/feed/"
+        name: "Sixteen:Nine"
+      - url: "https://www.avnetwork.com/rss"
+        name: "AV Network"
+      - url: "https://www.commercialintegrator.com/feed/"
+        name: "Commercial Integrator"
+      # 제조사
+      - url: "https://news.samsung.com/global/feed"
+        name: "삼성 뉴스룸"
+      - url: "https://www.lg.com/global/rss/news"
+        name: "LG Newsroom"
+
+  PC:
+    keywords:
+      - "PC"
+      - "노트북"
+      - "데스크탑"
+      - "그래픽카드"
+      - "CPU"
+      - "GPU"
+      - "processor"
+      - "laptop"
+    max_items: 10
+    rss_sources:
+      # PC 전문 리뷰 사이트
+      - url: "https://www.tomshardware.com/feeds/all"
+        name: "Tom's Hardware"
+      - url: "https://www.anandtech.com/rss/"
+        name: "AnandTech"
+      - url: "https://www.notebookcheck.net/News.152.0.html?rss=1"
+        name: "NotebookCheck"
+      - url: "https://www.pcmag.com/feeds/rss"
+        name: "PCMag"
+      - url: "https://www.techpowerup.com/rss/news"
+        name: "TechPowerUp"
+      - url: "https://www.guru3d.com/rss/"
+        name: "Guru3D"
+      - url: "https://www.phoronix.com/rss.php"
+        name: "Phoronix"
+      # 제조사 블로그
+      - url: "https://www.intel.com/content/www/us/en/newsroom/rss.xml"
+        name: "Intel Blog"
+      - url: "https://www.amd.com/en/rss.xml"
+        name: "AMD Blog"
+      - url: "https://www.qualcomm.com/rss.xml"
+        name: "Qualcomm Blog"
+      - url: "https://blogs.nvidia.com/feed/"
+        name: "NVIDIA Blog"
+      # 종합 IT 매체
+      - url: "https://www.digitaltrends.com/feed/"
+        name: "Digital Trends"
+      - url: "https://gizmodo.com/rss"
+        name: "Gizmodo"
+      - url: "https://feeds.arstechnica.com/arstechnica/index"
+        name: "Ars Technica"
+
+  Audio_AV:
+    keywords:
+      - "오디오"
+      - "사운드바"
+      - "스피커"
+      - "이어폰"
+      - "헤드폰"
+      - "audio"
+      - "speaker"
+      - "headphone"
+      - "soundbar"
+      - "earbuds"
+    max_items: 10
+    rss_sources:
+      # 오디오 전문 매체
+      - url: "https://www.avforums.com/articles/index.rss"
+        name: "AVForums"
+      - url: "https://www.whathifi.com/rss.xml"
+        name: "WhatHiFi"
+      - url: "https://www.soundguys.com/feed/"
+        name: "SoundGuys"
+      - url: "https://www.headfonics.com/feed/"
+        name: "Headfonics"
+      - url: "https://www.audiosciencereview.com/forum/-/index.rss"
+        name: "Audio Science Review"
+      # 종합 IT 매체
+      - url: "https://www.cnet.com/rss/all/"
+        name: "CNET"
+      - url: "https://www.theverge.com/rss/index.xml"
+        name: "The Verge"
+      - url: "https://www.engadget.com/rss.xml"
+        name: "Engadget"
+
+  AI_Cloud:
+    keywords:
+      - "인공지능"
+      - "AI"
+      - "챗GPT"
+      - "ChatGPT"
+      - "클라우드"
+      - "머신러닝"
+      - "machine learning"
+      - "deep learning"
+      - "LLM"
+      - "generative AI"
+    max_items: 10
+    rss_sources:
+      # AI 연구 기관/기업 블로그
+      - url: "https://blog.google/technology/ai/rss/"
+        name: "Google AI Blog"
+      - url: "https://blogs.microsoft.com/ai/feed/"
+        name: "Microsoft AI Blog"
+      - url: "https://openai.com/blog/rss.xml"
+        name: "OpenAI Blog"
+      - url: "https://ai.facebook.com/blog/rss/"
+        name: "Meta AI Blog"
+      - url: "https://www.anthropic.com/news/rss.xml"
+        name: "Anthropic News"
+      - url: "https://aws.amazon.com/blogs/aws/feed/"
+        name: "AWS Blog"
+      - url: "https://azure.microsoft.com/en-us/blog/feed/"
+        name: "Azure Blog"
+      # AI 전문 매체
+      - url: "https://venturebeat.com/feed/"
+        name: "VentureBeat"
+      - url: "https://www.marktechpost.com/feed/"
+        name: "MarkTechPost"
+      - url: "https://www.artificialintelligence-news.com/feed/"
+        name: "AI News"
+      # 기술 전문 매체
+      - url: "https://spectrum.ieee.org/rss/fulltext"
+        name: "IEEE Spectrum"
+      - url: "https://techcrunch.com/feed/"
+        name: "TechCrunch"
+      - url: "https://www.theverge.com/rss/index.xml"
+        name: "The Verge"
+      - url: "https://www.technologyreview.com/feed/"
+        name: "MIT Technology Review"
+
+  Tech_Industry:
+    keywords:
+      - "tech"
+      - "technology"
+      - "startup"
+      - "스타트업"
+      - "반도체"
+      - "semiconductor"
+      - "chip"
+      - "funding"
+      - "acquisition"
+      - "IPO"
+      - "venture"
+    max_items: 10
+    rss_sources:
+      # 기술 산업 전문 매체
+      - url: "https://techcrunch.com/feed/"
+        name: "TechCrunch"
+      - url: "https://www.theverge.com/rss/index.xml"
+        name: "The Verge"
+      - url: "https://www.cnet.com/rss/all/"
+        name: "CNET"
+      - url: "https://www.engadget.com/rss.xml"
+        name: "Engadget"
+      - url: "https://www.zdnet.com/news/rss.xml"
+        name: "ZDNet"
+      - url: "https://www.wired.com/feed/rss"
+        name: "Wired"
+      - url: "https://www.computerworld.com/index.rss"
+        name: "Computerworld"
+      - url: "https://www.infoworld.com/index.rss"
+        name: "InfoWorld"
+      # 비즈니스 뉴스
+      - url: "https://www.reuters.com/rssFeed/technologyNews"
+        name: "Reuters Technology"
+      - url: "https://www.bloomberg.com/feed/podcast/technology.xml"
+        name: "Bloomberg Technology"
+      - url: "https://www.cnbc.com/id/19854910/device/rss/rss.html"
+        name: "CNBC Technology"
+      - url: "https://apnews.com/rss/apf-technology"
+        name: "AP News Technology"
+      - url: "https://asia.nikkei.com/rss/feed/technology"
+        name: "Nikkei Asia Technology"
+      - url: "https://www.businessinsider.com/rss"
+        name: "Business Insider Tech"
+      - url: "https://www.axios.com/technology"
+        name: "Axios Technology"
+
+  Korea_IT:
+    keywords:
+      - "삼성"
+      - "Samsung"
+      - "LG"
+      - "SK"
+      - "네이버"
+      - "Naver"
+      - "카카오"
+      - "Kakao"
+      - "한국"
+      - "Korea"
+      - "IT"
+      - "현대"
+      - "Hyundai"
+    max_items: 10
+    rss_sources:
+      # 기업 뉴스
+      - url: "https://news.samsung.com/global/feed"
+        name: "삼성 뉴스룸"
+      # IT 전문 매체
+      - url: "https://www.aitimes.com/rss/all.xml"
+        name: "AI타임스"
+      - url: "https://www.zdnet.co.kr/rss/news.rss"
+        name: "지디넷코리아"
+      - url: "https://www.dt.co.kr/rss/all.xml"
+        name: "디지털타임스"
+      - url: "https://www.etnews.com/rss/all.xml"
+        name: "전자신문"
+      - url: "https://www.itworld.co.kr/rss/all.xml"
+        name: "ITWorld Korea"
+      - url: "https://byline.network/feed/"
+        name: "바이라인네트워크"
+      - url: "https://platum.kr/feed"
+        name: "플래텀"
+      - url: "https://www.venturesquare.net/feed"
+        name: "벤처스퀘어"
+      # 포털 뉴스
+      - url: "https://news.naver.com/rss/main.xml"
+        name: "네이버 헤드라인"
+      - url: "https://news.naver.com/rss/it.xml"
+        name: "네이버 IT/과학"
+      # 경제 매체
+      - url: "https://rss.hankyung.com/new/news_main.xml"
+        name: "한국경제"
+      - url: "https://file.mk.co.kr/news/rss/rss_30000001.xml"
+        name: "매일경제"
+      - url: "https://www.yna.co.kr/rss/all.xml"
+        name: "연합뉴스"
+      - url: "https://www.businesspost.co.kr/BP?command=rss"
+        name: "비즈니스포스트"
+      - url: "https://dealsite.co.kr/rss/all"
+        name: "딜사이트"
+
+  Global_Media:
+    keywords:
+      - "tech"
+      - "technology"
+      - "digital"
+      - "innovation"
+      - "gadget"
+      - "device"
+      - "electronics"
+    max_items: 8
+    rss_sources:
+      # 글로벌 주요 언론
+      - url: "https://rss.nytimes.com/services/xml/rss/nyt/Technology.xml"
+        name: "NYTimes Technology"
+      - url: "https://feeds.washingtonpost.com/rss/business/technology"
+        name: "Washington Post Technology"
+      - url: "https://www.ft.com/technology?format=rss"
+        name: "Financial Times Technology"
+      - url: "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+        name: "CNBC"
+      - url: "https://www.bbc.com/news/technology/rss.xml"
+        name: "BBC Technology"
+      - url: "https://www.theguardian.com/technology/rss"
+        name: "The Guardian Technology"
+      # 중국 매체
+      - url: "http://www.xinhuanet.com/english/rss/worldrss.xml"
+        name: "Xinhua"
+      - url: "https://www.globaltimes.cn/rss/world.xml"
+        name: "Global Times"
+      - url: "https://www.scmp.com/rss/91/feed"
+        name: "South China Morning Post Tech"
+      # 기술 매체
+      - url: "https://feeds.arstechnica.com/arstechnica/index"
+        name: "Ars Technica"
+      - url: "https://gizmodo.com/rss"
+        name: "Gizmodo"
+      - url: "https://www.digitaltrends.com/feed/"
+        name: "Digital Trends"
+      - url: "https://mashable.com/feeds/rss/all"
+        name: "Mashable"
+
+# 주요 IT 매체 RSS 소스 (전체 카테고리 공통) - 사용 안 함
+global_rss_sources:
+  - url: "https://techcrunch.com/feed/"
+    name: "TechCrunch"
+    enabled: false
+
+# 스코어링 가중치
+weights:
+  title_match: 10        # 제목에 키워드 포함 시
+  brand_priority: 20     # 우선순위 브랜드 가중치 (Display 카테고리 등)
+  source_priority: 5     # 특정 소스에 가중치 부여
+
+# 자동화 설정
+automation:
+  auto_mode: false       # true 시 수동 큐레이션 생략
+  skip_weekends: false   # 주말 실행 시 자동 종료
+  skip_holidays: true    # 공휴일 체크 (workalendar 라이브러리 활용)
+
+# RSS 요청 설정
+rss:
+  timeout: 10           # 타임아웃 (초)
+  retry_count: 3        # 재시도 횟수
+  use_cache: false      # 캐싱 사용 여부
+
+# AI 요약 설정 (.env 파일에서 API 키 로드)
+ai_summary:
+  enabled: true                    # AI 요약 활성화 여부
+  provider: "gemini"               # gemini, openai, claude, none
+  fallback_to_rss: true            # AI 실패 시 RSS description 사용
+  max_summary_length: 350          # 최대 요약 길이 (문자) - 2-3줄 분량
+  prompt_template: |
+    다음 뉴스 기사를 3-4줄로 요약해주세요. 핵심 내용만 간결하게 작성하세요.
+
+    제목: {title}
+    내용: {description}
+
+    요약:
+
+# 로깅 설정
+logging:
+  level: "INFO"                    # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  log_to_file: true                # 파일 로깅 활성화
+  log_dir: "logs"                  # 로그 디렉토리
+  log_format: "[%(asctime)s] [%(levelname)s] %(message)s"
+  date_format: "%Y-%m-%d %H:%M:%S"
+
+# 아카이브 설정
+archive:
+  enabled: true                    # 아카이빙 활성화
+  archive_dir: "archive"           # 아카이브 디렉토리
+  keep_days: 90                    # 보관 기간 (일)
