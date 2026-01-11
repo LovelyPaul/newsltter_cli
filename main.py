@@ -245,6 +245,42 @@ class AISummarizer:
                 return self._fallback_summary(description)
             return "요약을 생성할 수 없습니다."
 
+    def translate_title(self, title: str) -> str:
+        """영문 제목을 한글로 번역"""
+        if not self.enabled:
+            return title
+
+        try:
+            prompt = f"다음 영문 뉴스 제목을 간결한 한글로 번역해주세요. 번역만 출력하고 다른 설명은 하지 마세요:\n\n{title}"
+
+            if self.provider == 'gemini':
+                time.sleep(1.5)
+                response = self.client.generate_content(prompt)
+                return response.text.strip()
+
+            elif self.provider == 'openai':
+                response = self.client.chat.completions.create(
+                    model=os.getenv('OPENAI_MODEL', 'gpt-4o-mini'),
+                    messages=[{"role": "user", "content": prompt}],
+                    max_tokens=100,
+                    temperature=0.3
+                )
+                return response.choices[0].message.content.strip()
+
+            elif self.provider == 'claude':
+                response = self.client.messages.create(
+                    model=os.getenv('CLAUDE_MODEL', 'claude-3-haiku-20240307'),
+                    max_tokens=100,
+                    messages=[{"role": "user", "content": prompt}]
+                )
+                return response.content[0].text.strip()
+
+            return title
+
+        except Exception as e:
+            self.logger.debug(f"제목 번역 실패: {str(e)}")
+            return title
+
     def _fallback_summary(self, description: str) -> str:
         """RSS description을 간단히 정리"""
         clean = re.compile('<.*?>')
@@ -401,7 +437,7 @@ def fetch_news_by_category(
             count_before = len(news_list)
 
             for entry in feed.entries:
-                news_item = parse_feed_entry(entry, today, config, summarizer, logger, keywords)
+                news_item = parse_feed_entry(entry, today, config, summarizer, logger, keywords, source_name=name)
                 if news_item:
                     news_list.append(news_item)
 
@@ -421,7 +457,8 @@ def parse_feed_entry(
     config: dict,
     summarizer: AISummarizer,
     logger: logging.Logger,
-    keywords: List[str] = None
+    keywords: List[str] = None,
+    source_name: str = None
 ) -> Optional[Dict]:
     """RSS 엔트리 파싱"""
     try:
@@ -433,7 +470,8 @@ def parse_feed_entry(
         return None
 
     # 제목 추출
-    title = entry.title
+    original_title = entry.title
+    title = original_title
 
     # 제외 키워드 체크
     exclude_keywords = config.get('exclude_keywords', [])
@@ -460,11 +498,25 @@ def parse_feed_entry(
         # description이 거의 없으면 제목 사용
         description = title
 
+    # 영문 제목 번역 (한글이 포함되어 있지 않으면 번역)
+    if source_name and not any('\uac00' <= c <= '\ud7a3' for c in original_title):
+        # 한글이 없으면 영문 뉴스로 간주하고 번역
+        try:
+            translated_title = summarizer.translate_title(original_title)
+            title = f"[{source_name}] {translated_title}"
+        except:
+            title = f"[{source_name}] {original_title}"
+    elif source_name:
+        # 한글 뉴스는 출처만 표시
+        title = f"[{source_name}] {original_title}"
+
     # AI 요약 생성
-    summary = summarizer.summarize(title, clean_text(description))
+    summary = summarizer.summarize(original_title, clean_text(description))
 
     return {
         'title': title,
+        'original_title': original_title,
+        'source': source_name,
         'link': entry.link,
         'summary': summary,
         'score': 0,
