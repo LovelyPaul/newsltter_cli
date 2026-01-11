@@ -29,6 +29,7 @@ logs/
 # Generated newsletters
 newsletter_*.html
 archive/
+news/
 
 # Test files
 test_*.py
